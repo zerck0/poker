@@ -21,11 +21,19 @@ public class PokerTest {
         card(11, Suit.HEARTS)
     );
 
-    private static final Hand THREE_OF_A_KIND = hand(
+    private static final Hand BRELAN = hand(
         card(4, Suit.CLUBS),
         card(4, Suit.DIAMONDS),
         card(4, Suit.SPADES),
         card(9, Suit.HEARTS),
+        card(13, Suit.CLUBS)
+    );
+
+    private static final Hand CARRE = hand(
+        card(7, Suit.CLUBS),
+        card(7, Suit.DIAMONDS),
+        card(7, Suit.SPADES),
+        card(7, Suit.HEARTS),
         card(13, Suit.CLUBS)
     );
 
@@ -47,7 +55,12 @@ public class PokerTest {
 
     @Test
     void threeOfAKindScores30() {
-        assertEquals(30, Poker.score(List.of(THREE_OF_A_KIND)));
+        assertEquals(30, Poker.score(List.of(BRELAN)));
+    }
+
+    @Test
+    void fourOfAKindScores60() {
+        assertEquals(60, Poker.score(List.of(CARRE)));
     }
 
     private static Hand hand(Card... cards) {
