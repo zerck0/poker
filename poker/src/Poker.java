@@ -23,17 +23,16 @@ public class Poker {
     }
 
     private static boolean hasBrelan(Hand hand) {
-        for (Card card : hand.cards()) {
-            if (countCardsWithValue(hand, card.value()) == 3) {
-                return true;
-            }
-        }
-        return false;
+        return hasSameValueCount(hand, 3);
     }
 
     private static boolean hasCarre(Hand hand) {
+        return hasSameValueCount(hand, 4);
+    }
+
+    private static boolean hasSameValueCount(Hand hand, int count) {
         for (Card card : hand.cards()) {
-            if (countCardsWithValue(hand, card.value()) == 4) {
+            if (countCardsWithValue(hand, card.value()) == count) {
                 return true;
             }
         }
