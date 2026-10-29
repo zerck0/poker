@@ -2,7 +2,10 @@ import java.util.List;
 
 public class Poker {
     public static int score(List<Hand> hands) {
-        Hand hand = hands.get(0);
+        return highestCardValue(hands.get(0));
+    }
+
+    private static int highestCardValue(Hand hand) {
         int max = 0;
         for (Card card : hand.cards()) {
             if (card.value() > max) {

@@ -6,29 +6,36 @@ import org.junit.jupiter.api.Test;
 public class PokerTest {
 
     @Test
-    void singleHighCardHandScoresValueOfHighestCard() {
-        Hand hand = new Hand(List.of(
-            new Card(3, Suit.CLUBS),
-            new Card(8, Suit.DIAMONDS),
-            new Card(10, Suit.HEARTS),
-            new Card(12, Suit.SPADES),
-            new Card(13, Suit.CLUBS)
-        ));
+    void highCardScoresHighestCardValue() {
+        Hand hand = hand(
+            card(3, Suit.CLUBS),
+            card(8, Suit.DIAMONDS),
+            card(10, Suit.HEARTS),
+            card(12, Suit.SPADES),
+            card(13, Suit.CLUBS)
+        );
 
         assertEquals(13, Poker.score(List.of(hand)));
     }
 
     @Test
     void highCardWithAceScores14() {
-        Hand hand = new Hand(List.of(
-            new Card(14, Suit.HEARTS),
-            new Card(4, Suit.CLUBS),
-            new Card(7, Suit.DIAMONDS),
-            new Card(9, Suit.SPADES),
-            new Card(11, Suit.HEARTS)
-        ));
+        Hand hand = hand(
+            card(14, Suit.HEARTS),
+            card(4, Suit.CLUBS),
+            card(7, Suit.DIAMONDS),
+            card(9, Suit.SPADES),
+            card(11, Suit.HEARTS)
+        );
 
         assertEquals(14, Poker.score(List.of(hand)));
     }
 
+    private static Hand hand(Card... cards) {
+        return new Hand(List.of(cards));
+    }
+
+    private static Card card(int value, Suit suit) {
+        return new Card(value, suit);
+    }
 }
