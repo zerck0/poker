@@ -5,52 +5,36 @@ import org.junit.jupiter.api.Test;
 
 public class PokerTest {
 
+    private static final Hand KING_HIGH = hand(
+        card(3, Suit.CLUBS),
+        card(8, Suit.DIAMONDS),
+        card(10, Suit.HEARTS),
+        card(12, Suit.SPADES),
+        card(13, Suit.CLUBS)
+    );
+
+    private static final Hand ACE_HIGH = hand(
+        card(14, Suit.HEARTS),
+        card(4, Suit.CLUBS),
+        card(7, Suit.DIAMONDS),
+        card(9, Suit.SPADES),
+        card(11, Suit.HEARTS)
+    );
+
     @Test
     void highCardScoresHighestCardValue() {
-        Hand hand = hand(
-            card(3, Suit.CLUBS),
-            card(8, Suit.DIAMONDS),
-            card(10, Suit.HEARTS),
-            card(12, Suit.SPADES),
-            card(13, Suit.CLUBS)
-        );
-
-        assertEquals(13, Poker.score(List.of(hand)));
+        assertEquals(13, Poker.score(List.of(KING_HIGH)));
     }
 
     @Test
     void highCardWithAceScores14() {
-        Hand hand = hand(
-            card(14, Suit.HEARTS),
-            card(4, Suit.CLUBS),
-            card(7, Suit.DIAMONDS),
-            card(9, Suit.SPADES),
-            card(11, Suit.HEARTS)
-        );
-
-        assertEquals(14, Poker.score(List.of(hand)));
+        assertEquals(14, Poker.score(List.of(ACE_HIGH)));
     }
 
     @Test
     void scoresSumOfAllHands() {
-        Hand kingHigh = hand(
-            card(3, Suit.CLUBS),
-            card(8, Suit.DIAMONDS),
-            card(10, Suit.HEARTS),
-            card(12, Suit.SPADES),
-            card(13, Suit.CLUBS)
-        );
-        Hand aceHigh = hand(
-            card(14, Suit.HEARTS),
-            card(4, Suit.CLUBS),
-            card(7, Suit.DIAMONDS),
-            card(9, Suit.SPADES),
-            card(11, Suit.HEARTS)
-        );
-
-        assertEquals(27, Poker.score(List.of(kingHigh, aceHigh)));
+        assertEquals(27, Poker.score(List.of(KING_HIGH, ACE_HIGH)));
     }
-
 
     private static Hand hand(Card... cards) {
         return new Hand(List.of(cards));
