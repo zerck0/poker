@@ -21,6 +21,15 @@ public class PokerTest {
         card(11, Suit.HEARTS)
     );
 
+    private static final Hand THREE_OF_A_KIND = hand(
+        card(4, Suit.CLUBS),
+        card(4, Suit.DIAMONDS),
+        card(4, Suit.SPADES),
+        card(9, Suit.HEARTS),
+        card(13, Suit.CLUBS)
+    );
+
+
     @Test
     void highCardScoresHighestCardValue() {
         assertEquals(13, Poker.score(List.of(KING_HIGH)));
@@ -34,6 +43,11 @@ public class PokerTest {
     @Test
     void scoresSumOfAllHands() {
         assertEquals(27, Poker.score(List.of(KING_HIGH, ACE_HIGH)));
+    }
+
+    @Test
+    void threeOfAKindScores30() {
+        assertEquals(30, Poker.score(List.of(THREE_OF_A_KIND)));
     }
 
     private static Hand hand(Card... cards) {
