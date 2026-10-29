@@ -2,7 +2,11 @@ import java.util.List;
 
 public class Poker {
     public static int score(List<Hand> hands) {
-        return highestCardValue(hands.get(0));
+        int total = 0;
+        for (Hand hand : hands) {
+            total += highestCardValue(hand);
+        }
+        return total;
     }
 
     private static int highestCardValue(Hand hand) {
