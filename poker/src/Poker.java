@@ -1,12 +1,40 @@
 import java.util.List;
 
 public class Poker {
+    private static final int BRELAN_POINTS = 30;
+
     public static int score(List<Hand> hands) {
         int total = 0;
         for (Hand hand : hands) {
-            total += highestCardValue(hand);
+            total += scoreOf(hand);
         }
         return total;
+    }
+
+    private static int scoreOf(Hand hand) {
+        if (hasThreeOfAKind(hand)) {
+            return BRELAN_POINTS;
+        }
+        return highestCardValue(hand);
+    }
+
+    private static boolean hasThreeOfAKind(Hand hand) {
+        for (Card card : hand.cards()) {
+            if (countCardsWithValue(hand, card.value()) == 3) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static int countCardsWithValue(Hand hand, int value) {
+        int count = 0;
+        for (Card card : hand.cards()) {
+            if (card.value() == value) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private static int highestCardValue(Hand hand) {
